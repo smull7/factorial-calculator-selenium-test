@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "5d0f399e-69d6-4282-8cbe-b1e30a15bd39",
+		"name": "ApiTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "factorialCalculatorApiTestPass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Factorial of 5 is: 120 - test\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"120\");\r",
+							"});\r",
+							"//Status 200 test\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "number",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://qainterview.pythonanywhere.com/factorial",
+					"protocol": "http",
+					"host": [
+						"qainterview",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"factorial"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "factorialCalculatorApiTestFail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Status 500 test - non integer entered\r",
+							"pm.test(\"Status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});\r",
+							"pm.test(\"Response body title matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Internal Server Error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "number",
+							"value": "X",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://qainterview.pythonanywhere.com/factorial",
+					"protocol": "http",
+					"host": [
+						"qainterview",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"factorial"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
